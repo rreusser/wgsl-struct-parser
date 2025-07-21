@@ -1,0 +1,77 @@
+# wgsl-struct-parser [EXPERIMENTAL]
+
+## Introduction
+
+The WebGPU API does not currently permit reflection on struct layout so that must manually manage memory layout and pack uniform or storage data.
+
+Although the WebGPU API may eventually implement this, there are tools out there to fill this gap. See, for example, [webgpu-utils](https://github.com/greggman/webgpu-utils), [@timefold/webgpu](https://www.npmjs.com/package/@timefold/webgpu), or [TypeGPU](https://docs.swmansion.com/TypeGPU/).
+
+I'm picky though, and I wanted as little machinery between me and WebGPU as possible, at least until I more fully learn the API and tools become an asset rather than a hindrance.
+
+So this library implements a simple recursive-descent parser for WGSL struct definitions. TBD is computing the memory layout and facilitating packing data into structs.
+
+## Example
+
+Parse WGSL struct definitions directly. If using nested structs, you must pass a parsed struct to any dependents.
+
+```js
+import Struct from 'wgsl-struct-parser';
+
+const PointLight = Struct(`PointLight {
+  position: vec3f,
+  color: vec3f,
+}`)
+
+const Lighting = Struct(`struct Lighting {
+  ambient: vec3f,
+  pointLights: array<PointLight>,
+}`, [PointLight]);
+```
+
+Interpet the AST as needed:
+
+```js
+// PointLight =>
+{
+  "name": { "value": "PointLight" },
+  "members": [
+    {
+      "name": { "value": "position" },
+      "type": { "type": { "type": "f32" }, "size": 3 },
+      "attrs": []
+    },
+    {
+      "name": { "value": "color" },
+      "type": { "type": { "type": "f32" }, "size": 3 },
+      "attrs": []
+    }
+  ]
+}
+```
+
+Re-serialize for inclusion in a shader:
+
+```js
+const code = `
+${PointLight}
+${Lighting}
+...
+`;
+
+// code =>
+`
+struct PointLight {
+  position: vec3<f32>,
+  color: vec3<f32>,
+}
+struct Lighting {
+  ambientColor: vec3<f32>,
+  pointLights: array<PointLight>,
+}
+...
+`
+```
+
+## License
+
+&copy; 2025 Ricky Reusser. MIT License.

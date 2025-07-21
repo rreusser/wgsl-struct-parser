@@ -8,8 +8,8 @@
     "build": "rollup -c rollup.config.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ricky Reusser",
+  "license": "MIT",
   "description": "",
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
