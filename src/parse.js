@@ -13,11 +13,11 @@ import {
   SizeAttrNode,
   StructMemberNode,
   IdentifierNode,
-  RuntimeSizeArrayTypeSpecifierNode,
-  FixedSizedArrayTypeSpecifierNode,
-  ScalarTypeSpecifierNode,
-  VectorTypeSpecifierNode,
-  MatrixTypeSpecifierNode,
+  RuntimeSizeArrayTypeNode,
+  FixedSizedArrayTypeNode,
+  ScalarTypeNode,
+  VectorTypeNode,
+  MatrixTypeNode,
   DecimalIntNode
 
 } from './ast.js';
@@ -118,32 +118,29 @@ function parseMemberDeclaration(state) {
   if (!state.peek(IdentifierToken)) return null;
   const name = state.consume();
   state.consume(PunctuatorToken, ":");
-  const typeSpecifier = parseTypeSpecifier(state);
+  const type = parseType(state);
   return new StructMemberNode(
-    new IdentifierNode(name.value),
-    typeSpecifier,
-    attrs
-  );
+    new IdentifierNode(name.value), type, attrs);
 }
 
-function parseTemplateTypeSpecifier(state) {
+function parseTemplateType(state) {
   state.consume(PunctuatorToken, "<");
-  const type = parseTypeSpecifier(state);
+  const type = parseType(state);
   state.consume(PunctuatorToken, ">");
   return type;
 }
 
-function parseArrayTypeSpecifier(state) {
+function parseArrayType(state) {
   state.consume(PunctuatorToken, "<");
-  const type = parseTypeSpecifier(state);
+  const type = parseType(state);
   if (state.peek(PunctuatorToken, ",")) {
     state.consume();
     const size = new DecimalIntNode(state.consume(DecimalIntToken));
     state.consume(PunctuatorToken, ">");
-    return new FixedSizedArrayTypeSpecifierNode(type, size);
+    return new FixedSizedArrayTypeNode(type, size);
   } else {
     state.consume(PunctuatorToken, ">");
-    return new RuntimeSizeArrayTypeSpecifierNode(type);
+    return new RuntimeSizeArrayTypeNode(type);
   }
 }
 
@@ -154,35 +151,35 @@ const SHORTHAND_TO_TYPE = { h: "f16", f: "f32", i: "i32", u: "u32" };
 const VECTOR_TYPE_SHORTHANDS = 'hfiu';
 const MATRIX_TYPE_SHORTHANDS = 'hf';
 
-function parseTypeSpecifier(state) {
+function parseType(state) {
   let dataType, match;
   const token = state.consume([KeywordToken, IdentifierToken]);
 
   if (token instanceof KeywordToken) {
     if (token.value === "array") {
-      return parseArrayTypeSpecifier(state);
+      return parseArrayType(state);
     } else if ((match = token.value.match(SCALAR_TYPE_PATTERN))) {
-      return new ScalarTypeSpecifierNode(match[0]);
+      return new ScalarTypeNode(match[0]);
     } else if ((match = token.value.match(VECTOR_TYPE_PATTERN))) {
       const size = parseInt(match[2]);
       if (match[3]) {
         if (!VECTOR_TYPE_SHORTHANDS.includes(match[3]))
           throw new Error(`Invalid vector type specifier "${token.value}"`);
-        dataType = new ScalarTypeSpecifierNode(SHORTHAND_TO_TYPE[match[3]]);
+        dataType = new ScalarTypeNode(SHORTHAND_TO_TYPE[match[3]]);
       } else {
-        dataType = parseTemplateTypeSpecifier(state);
+        dataType = parseTemplateType(state);
       }
-      return new VectorTypeSpecifierNode(dataType, size);
+      return new VectorTypeNode(dataType, size);
     } else if ((match = token.value.match(MATRIX_TYPE_PATTERN))) {
       const size = [parseInt(match[2]), parseInt(match[3])];
       if (match[4]) {
         if (!MATRIX_TYPE_SHORTHANDS.includes(match[4]))
           throw new Error(`Invalid matrix type specifier "${token.value}"`);
-        dataType = new ScalarTypeSpecifierNode(SHORTHAND_TO_TYPE[match[4]]);
+        dataType = new ScalarTypeNode(SHORTHAND_TO_TYPE[match[4]]);
       } else {
-        dataType = parseTemplateTypeSpecifier(state);
+        dataType = parseTemplateType(state);
       }
-      return new MatrixTypeSpecifierNode(dataType, size);
+      return new MatrixTypeNode(dataType, size);
     }
   } else if (token instanceof IdentifierToken) {
     const foundType = state.known.get(token.value);

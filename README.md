@@ -37,16 +37,16 @@ StructDeclNode {
   members: [
     StructMemberNode {
       name: IdentifierNode { value: "position" },
-      type: VectorTypeSpecifierNode {
-        type: ScalarTypeSpecifierNode { type: "f32" },
+      type: VectorTypeNode {
+        type: ScalarTypeNode { type: "f32" },
         size: 3
       },
       attrs: []
     },
     StructMemberNode {
       name: IdentifierNode { value: "color" }
-      type: VectorTypeSpecifierNode {
-        type: ScalarTypeSpecifierNode { type: "f32" },
+      type: VectorTypeNode {
+        type: ScalarTypeNode { type: "f32" },
         size: 3
       }
       attrs: []
@@ -60,15 +60,15 @@ StructDeclNode {
   members: [
     StructMemberNode {
       name: IdentifierNode { value: "ambient" },
-      type: VectorTypeSpecifierNode {
-        type: ScalarTypeSpecifierNode {type: "f32"},
+      type: VectorTypeNode {
+        type: ScalarTypeNode {type: "f32"},
         size: 3
       },
       attrs: []
     },
     StructMemberNode {
       name: IdentifierNode { value: "pointLights" },
-      type: RuntimeSizeArrayTypeSpecifierNode {
+      type: RuntimeSizeArrayTypeNode {
         type: PointLight
       },
       attrs: []

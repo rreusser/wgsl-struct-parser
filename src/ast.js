@@ -42,7 +42,7 @@ export class SizeAttrNode extends ASTNode {
   }
 }
 
-export class RuntimeSizeArrayTypeSpecifierNode extends ASTNode {
+export class RuntimeSizeArrayTypeNode extends ASTNode {
   constructor(value) {
     super();
     this.value = value;
@@ -52,7 +52,7 @@ export class RuntimeSizeArrayTypeSpecifierNode extends ASTNode {
   }
 }
 
-export class FixedSizedArrayTypeSpecifierNode extends ASTNode {
+export class FixedSizedArrayTypeNode extends ASTNode {
   constructor(value, size) {
     super();
     this.value = value;
@@ -90,7 +90,7 @@ export class IdentifierNode extends ASTNode {
 }
 
 // See: https://www.w3.org/TR/WGSL/#alignment-and-size
-export class ScalarTypeSpecifierNode extends ASTNode {
+export class ScalarTypeNode extends ASTNode {
   constructor(type) {
     super();
     this.type = type;
@@ -122,7 +122,7 @@ export class ScalarTypeSpecifierNode extends ASTNode {
   }
 }
 
-export class VectorTypeSpecifierNode extends ASTNode {
+export class VectorTypeNode extends ASTNode {
   constructor(type, size) {
     super();
     this.type = type;
@@ -133,7 +133,7 @@ export class VectorTypeSpecifierNode extends ASTNode {
   }
 }
 
-export class MatrixTypeSpecifierNode extends ASTNode {
+export class MatrixTypeNode extends ASTNode {
   constructor(type, size) {
     super();
     this.type = type;
