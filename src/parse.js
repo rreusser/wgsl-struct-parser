@@ -15,7 +15,6 @@ import {
   IdentifierNode,
   RuntimeSizeArrayTypeSpecifierNode,
   FixedSizedArrayTypeSpecifierNode,
-  StructReferenceNode,
   ScalarTypeSpecifierNode,
   VectorTypeSpecifierNode,
   MatrixTypeSpecifierNode,
@@ -192,7 +191,7 @@ function parseTypeSpecifier(state) {
         `Unknown type "${token.value}" in type specifier. Did you supply it as a known type?`
       );
     }
-    return new StructReferenceNode(foundType);
+    return foundType;
   }
 }
 

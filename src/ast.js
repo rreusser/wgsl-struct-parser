@@ -89,16 +89,6 @@ export class IdentifierNode extends ASTNode {
   }
 }
 
-export class StructReferenceNode extends ASTNode {
-  constructor(type) {
-    super();
-    this.type = type;
-  }
-  toString() {
-    return this.type.name.toString();
-  }
-}
-
 // See: https://www.w3.org/TR/WGSL/#alignment-and-size
 export class ScalarTypeSpecifierNode extends ASTNode {
   constructor(type) {

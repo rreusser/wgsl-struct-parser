@@ -53,6 +53,28 @@ StructDeclNode {
     }
   ]
 }
+
+// Lighting =>
+StructDeclNode {
+  name: IdentifierNode { value: "Lighting" }
+  members: [
+    StructMemberNode {
+      name: IdentifierNode { value: "ambient" },
+      type: VectorTypeSpecifierNode {
+        type: ScalarTypeSpecifierNode {type: "f32"},
+        size: 3
+      },
+      attrs: []
+    },
+    StructMemberNode {
+      name: IdentifierNode { value: "pointLights" },
+      type: RuntimeSizeArrayTypeSpecifierNode {
+        type: PointLight
+      },
+      attrs: []
+    }
+  ]
+}
 ```
 
 Re-serialize for inclusion in a shader:
