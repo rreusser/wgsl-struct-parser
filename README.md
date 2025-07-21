@@ -15,14 +15,14 @@ So this library implements a simple recursive-descent parser for WGSL struct def
 Parse WGSL struct definitions directly. If using nested structs, you must pass a parsed struct to any dependents.
 
 ```js
-import Struct from 'wgsl-struct-parser';
+import parse from 'wgsl-struct-parser';
 
-const PointLight = Struct(`PointLight {
+const PointLight = parse(`struct PointLight {
   position: vec3f,
   color: vec3f,
 }`)
 
-const Lighting = Struct(`struct Lighting {
+const Lighting = parse(`struct Lighting {
   ambient: vec3f,
   pointLights: array<PointLight>,
 }`, [PointLight]);
