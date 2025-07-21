@@ -2,13 +2,13 @@
 
 ## Introduction
 
-The WebGPU API does not currently permit reflection on struct layout so that must manually manage memory layout and pack uniform or storage data.
+The WebGPU API does not permit reflection on WGSL struct definitions so that the developer must manage memory layout and manually pack data into uniform or storage buffers.
 
 Although the WebGPU API may eventually implement this, there are tools out there to fill this gap. See, for example, [webgpu-utils](https://github.com/greggman/webgpu-utils), [@timefold/webgpu](https://www.npmjs.com/package/@timefold/webgpu), or [TypeGPU](https://docs.swmansion.com/TypeGPU/).
 
 I'm picky though, and I wanted as little machinery between me and WebGPU as possible, at least until I more fully learn the API and tools become an asset rather than a hindrance.
 
-So this library implements a simple recursive-descent parser for WGSL struct definitions. TBD is computing the memory layout and facilitating packing data into structs.
+So this library implements a simple recursive-descent parser for WGSL struct definitions. It currently parses structs into an AST. Once it computes memory layout and assists packing data into buffers, its functionality will be considered complete.
 
 ## Example
 
