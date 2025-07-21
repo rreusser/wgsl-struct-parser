@@ -42,7 +42,7 @@ StructDeclNode {
         size: 3
       }
       attrs: []
-    }
+    },
     StructMemberNode {
       name: IdentifierNode { value: "color" }
       type: VectorTypeNode {
@@ -65,7 +65,7 @@ StructDeclNode {
         size: 3
       }
       attrs: []
-    }
+    },
     StructMemberNode {
       name: IdentifierNode { value: "pointLights" }
       type: RuntimeSizeArrayTypeNode {
