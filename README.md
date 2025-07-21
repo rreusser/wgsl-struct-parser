@@ -89,7 +89,6 @@ ${Lighting}
 
 ```wgsl
 // code =>
-`
 struct PointLight {
   position: vec3<f32>,
   color: vec3<f32>,
@@ -99,7 +98,6 @@ struct Lighting {
   pointLights: array<PointLight>,
 }
 ...
-`
 ```
 
 ## License
