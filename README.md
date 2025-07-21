@@ -32,18 +32,24 @@ Interpet the AST as needed:
 
 ```js
 // PointLight =>
-{
-  "name": { "value": "PointLight" },
-  "members": [
-    {
-      "name": { "value": "position" },
-      "type": { "type": { "type": "f32" }, "size": 3 },
-      "attrs": []
+StructDeclNode {
+  name: IdentifierNode { value: "PointLight" },
+  members: [
+    StructMemberNode {
+      name: IdentifierNode { value: "position" },
+      type: VectorTypeSpecifierNode {
+        type: ScalarTypeSpecifierNode {type: "f32"},
+        size: 3
+      },
+      attrs: []
     },
-    {
-      "name": { "value": "color" },
-      "type": { "type": { "type": "f32" }, "size": 3 },
-      "attrs": []
+    StructMemberNode {
+      name: IdentifierNode { value: "color" }
+      type: VectorTypeSpecifierNode {
+        type: ScalarTypeSpecifierNode {type: "f32"},
+        size: 3
+      }
+      attrs: []
     }
   ]
 }
@@ -61,12 +67,12 @@ ${Lighting}
 // code =>
 `
 struct PointLight {
-  position: vec3<f32>,
-  color: vec3<f32>,
+position: vec3<f32>,
+color: vec3<f32>,
 }
 struct Lighting {
-  ambientColor: vec3<f32>,
-  pointLights: array<PointLight>,
+ambientColor: vec3<f32>,
+pointLights: array<PointLight>,
 }
 ...
 `
