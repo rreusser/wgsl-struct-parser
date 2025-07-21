@@ -85,16 +85,18 @@ ${PointLight}
 ${Lighting}
 ...
 `;
+```
 
+```wgsl
 // code =>
 `
 struct PointLight {
-position: vec3<f32>,
-color: vec3<f32>,
+  position: vec3<f32>,
+  color: vec3<f32>,
 }
 struct Lighting {
-ambientColor: vec3<f32>,
-pointLights: array<PointLight>,
+  ambientColor: vec3<f32>,
+  pointLights: array<PointLight>,
 }
 ...
 `
