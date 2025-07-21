@@ -8,7 +8,7 @@ Although the WebGPU API may eventually implement this, there are tools out there
 
 I'm picky though, and I wanted as little machinery between me and WebGPU as possible, at least until I more fully learn the API and tools become an asset rather than a hindrance.
 
-So this library implements a simple recursive-descent parser for WGSL struct definitions. It currently parses structs into an AST. Once it computes memory layout and assists packing data into buffers, its functionality will be considered complete.
+So this library implements a simple recursive-descent parser for WGSL struct definitions. It currently parses structs into an AST. It aims to present correct useful information about memory layout. It does not aim to be rigorously spec-compliant since validating WGSL code remains the job of the WebGPU device. Once it computes memory layout and assists packing data into buffers, the functionality of this module will be considered complete.
 
 ## Example
 
@@ -48,7 +48,7 @@ StructDeclNode {
       type: VectorTypeNode {
         type: ScalarTypeNode { type: "f32" },
         size: 3
-      }
+      },
       attrs: []
     }
   ]
