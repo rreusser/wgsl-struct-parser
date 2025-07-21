@@ -38,7 +38,7 @@ StructDeclNode {
     StructMemberNode {
       name: IdentifierNode { value: "position" },
       type: VectorTypeSpecifierNode {
-        type: ScalarTypeSpecifierNode {type: "f32"},
+        type: ScalarTypeSpecifierNode { type: "f32" },
         size: 3
       },
       attrs: []
@@ -46,7 +46,7 @@ StructDeclNode {
     StructMemberNode {
       name: IdentifierNode { value: "color" }
       type: VectorTypeSpecifierNode {
-        type: ScalarTypeSpecifierNode {type: "f32"},
+        type: ScalarTypeSpecifierNode { type: "f32" },
         size: 3
       }
       attrs: []
