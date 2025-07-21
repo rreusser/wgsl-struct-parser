@@ -33,22 +33,22 @@ Interpet the AST as needed:
 ```js
 // PointLight =>
 StructDeclNode {
-  name: IdentifierNode { value: "PointLight" },
+  name: IdentifierNode { value: "PointLight" }
   members: [
     StructMemberNode {
-      name: IdentifierNode { value: "position" },
+      name: IdentifierNode { value: "position" }
       type: VectorTypeNode {
-        type: ScalarTypeNode { type: "f32" },
+        type: ScalarTypeNode { type: "f32" }
         size: 3
-      },
+      }
       attrs: []
-    },
+    }
     StructMemberNode {
       name: IdentifierNode { value: "color" }
       type: VectorTypeNode {
-        type: ScalarTypeNode { type: "f32" },
+        type: ScalarTypeNode { type: "f32" }
         size: 3
-      },
+      }
       attrs: []
     }
   ]
@@ -59,18 +59,18 @@ StructDeclNode {
   name: IdentifierNode { value: "Lighting" }
   members: [
     StructMemberNode {
-      name: IdentifierNode { value: "ambient" },
+      name: IdentifierNode { value: "ambient" }
       type: VectorTypeNode {
-        type: ScalarTypeNode {type: "f32"},
+        type: ScalarTypeNode {type: "f32"}
         size: 3
-      },
+      }
       attrs: []
-    },
+    }
     StructMemberNode {
-      name: IdentifierNode { value: "pointLights" },
+      name: IdentifierNode { value: "pointLights" }
       type: RuntimeSizeArrayTypeNode {
         type: PointLight
-      },
+      }
       attrs: []
     }
   ]
